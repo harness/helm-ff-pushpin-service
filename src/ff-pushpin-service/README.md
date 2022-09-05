@@ -1,6 +1,6 @@
 # ff-pushpin-service
 
-![Version: 0.2.3](https://img.shields.io/badge/Version-0.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -60,7 +60,7 @@ A Helm chart for Kubernetes
 | replicaCount | int | `1` |  |
 | service.port17001 | int | `17001` |  |
 | service.port17002 | int | `17002` |  |
-| service.port17002 | int | `17003` |  |
+| service.port17003 | int | `17003` |  |
 | service.targetport17001 | int | `7999` |  |
 | service.targetport17002 | int | `443` |  |
 | service.targetport17003 | int | `5561` |  |

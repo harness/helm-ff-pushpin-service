@@ -83,7 +83,7 @@ service:
   targetport17001: 7999
   port17002: 17002
   targetport17002: 443
-  port17002: 17003
+  port17003: 17003
   targetport17003: 5561
 
 autoscaling:
