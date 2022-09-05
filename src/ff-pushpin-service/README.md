@@ -1,6 +1,6 @@
 # ff-pushpin-service
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.2.4](https://img.shields.io/badge/Version-0.2.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -30,21 +30,6 @@ A Helm chart for Kubernetes
 | global.ingress.tls.enabled | bool | `false` |  |
 | global.ingress.tls.secretName | string | `"harness-ssl"` |  |
 | global.loadbalancerURL | string | `"test@harness.io"` |  |
-| image.digest | string | `""` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.registry | string | `"docker.io"` |  |
-| image.repository | string | `"harness/ff-pushpin-server-signed"` |  |
-| image.tag | string | `"1.546.0"` |  |
-| jobs.postgres_migration.image.digest | string | `""` |  |
-| jobs.postgres_migration.image.pullPolicy | string | `"Always"` |  |
-| jobs.postgres_migration.image.registry | string | `"docker.io"` |  |
-| jobs.postgres_migration.image.repository | string | `"harness/ff-pushpin-postgres-migration-signed"` |  |
-| jobs.postgres_migration.image.tag | string | `"1.546.0"` |  |
-| jobs.timescaledb_migrate.image.digest | string | `""` |  |
-| jobs.timescaledb_migrate.image.pullPolicy | string | `"Always"` |  |
-| jobs.timescaledb_migrate.image.registry | string | `"docker.io"` |  |
-| jobs.timescaledb_migrate.image.repository | string | `"harness/ff-pushpin-timescale-migration-signed"` |  |
-| jobs.timescaledb_migrate.image.tag | string | `"1.546.0"` |  |
 | maxSurge | int | `1` |  |
 | maxUnavailable | int | `0` |  |
 | memory | int | `4096` |  |
@@ -52,22 +37,36 @@ A Helm chart for Kubernetes
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
+| pushpin.image.digest | string | `""` |  |
+| pushpin.image.pullPolicy | string | `"IfNotPresent"` |  |
+| pushpin.image.registry | string | `"docker.io"` |  |
+| pushpin.image.repository | string | `"harness/ff-pushpin-signed"` |  |
+| pushpin.image.tag | string | `"1.546.0"` |  |
+| pushpin.resources.limits.cpu | int | `1` |  |
+| pushpin.resources.limits.memory | string | `"2048Mi"` |  |
+| pushpin.resources.requests.cpu | int | `1` |  |
+| pushpin.resources.requests.memory | string | `"2048Mi"` |  |
+| pushpinworker.image.digest | string | `""` |  |
+| pushpinworker.image.pullPolicy | string | `"IfNotPresent"` |  |
+| pushpinworker.image.registry | string | `"docker.io"` |  |
+| pushpinworker.image.repository | string | `"harness/ff-pushpin-worker-signed"` |  |
+| pushpinworker.image.tag | string | `"1.546.0"` |  |
+| pushpinworker.resources.limits.cpu | int | `1` |  |
+| pushpinworker.resources.limits.memory | string | `"2048Mi"` |  |
+| pushpinworker.resources.requests.cpu | int | `1` |  |
+| pushpinworker.resources.requests.memory | string | `"2048Mi"` |  |
+| pushpinworker.securityContext.runAsNonRoot | bool | `true` |  |
+| pushpinworker.securityContext.runAsUser | int | `65534` |  |
 | replicaCount | int | `1` |  |
-| resources.limits.cpu | int | `1` |  |
-| resources.limits.memory | string | `"2048Mi"` |  |
-| resources.requests.cpu | int | `1` |  |
-| resources.requests.memory | string | `"2048Mi"` |  |
-| securityContext.runAsNonRoot | bool | `true` |  |
-| securityContext.runAsUser | int | `65534` |  |
-| service.grpcport | int | `16002` |  |
-| service.port | int | `17001` |  |
-| service.targetgrpcport | int | `3001` |  |
-| service.targetport | int | `3000` |  |
+| service.port17001 | int | `17001` |  |
+| service.port17002 | int | `17002` |  |
+| service.port17003 | int | `17003` |  |
+| service.targetport17001 | int | `7999` |  |
+| service.targetport17002 | int | `443` |  |
+| service.targetport17003 | int | `5561` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"harness-default"` |  |
-| timescaleSecret.password.key | string | `"timescaledbPostgresPassword"` |  |
-| timescaleSecret.password.name | string | `"harness-secrets"` |  |
 | tolerations | list | `[]` |  |
 

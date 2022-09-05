@@ -19,36 +19,42 @@ replicaCount: 1
 maxSurge: 1
 maxUnavailable: 0
 
-image:
-  registry: docker.io
-  repository: harness/ff-pushpin-server-signed
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.546.0"
-  digest: ""
+pushpin:
+  image:
+    registry: docker.io
+    repository: harness/ff-pushpin-signed
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.546.0"
+    digest: ""
+  resources:
+    limits:
+      cpu: 1
+      memory: 2048Mi
+    requests:
+      cpu: 1
+      memory: 2048Mi
 
-jobs:
-  postgres_migration:
-    image:
-      registry: docker.io
-      tag: "1.546.0"
-      repository: harness/ff-pushpin-postgres-migration-signed
-      pullPolicy: Always
-      digest: ""
-  timescaledb_migrate:
-    image:
-      registry: docker.io
-      tag: "1.546.0"
-      repository: harness/ff-pushpin-timescale-migration-signed
-      pullPolicy: Always
-      digest: ""
+pushpinworker:
+  image:
+    registry: docker.io
+    repository: harness/ff-pushpin-worker-signed
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.546.0"
+    digest: ""
+  securityContext:
+    runAsUser: 65534
+    runAsNonRoot: true
+  resources:
+    limits:
+      cpu: 1
+      memory: 2048Mi
+    requests:
+      cpu: 1
+      memory: 2048Mi
 
 configmap: {}
-
-timescaleSecret:
-  password:
-    name: harness-secrets
-    key: timescaledbPostgresPassword
 
 memory: 4096
 
@@ -71,30 +77,14 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext:
-  runAsUser: 65534
-  runAsNonRoot: true
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
 service:
   type: ClusterIP
-  port: 17001
-  targetport: 3000
-  grpcport: 16002
-  targetgrpcport: 3001
-
-resources:
-  limits:
-    cpu: 1
-    memory: 2048Mi
-  requests:
-    cpu: 1
-    memory: 2048Mi
+  port17001: 17001
+  targetport17001: 7999
+  port17002: 17002
+  targetport17002: 443
+  port17003: 17003
+  targetport17003: 5561
 
 autoscaling:
   enabled: false

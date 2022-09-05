@@ -67,3 +67,17 @@ Create the name of the sentinet image to use
 {{- define "ff-pushpin-service.securityImage" -}}
 {{ include "common.images.image" (dict "imageRoot" .Values.securityImage.image "global" .Values.global) }}
 {{- end }}
+
+{{/*
+Create the name of the redis image to use
+*/}}
+{{- define "ff-pushpin-service.pushpinImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.pushpin.image "global" .Values.global) }}
+{{- end }}
+
+{{/*
+Create the name of the redis image to use
+*/}}
+{{- define "ff-pushpin-service.pushpinworkerImage" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.pushpinworker.image "global" .Values.global) }}
+{{- end }}

@@ -39,52 +39,58 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       terminationGracePeriodSeconds: 30
       # Does it require any dependency on other service to startup
-      # initContainers: 
+      # initContainers:
       containers:
-        - name: ff-pushpin-service
-          image: {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: ff-pushpin
+          image: {{ include "ff-pushpin-service.pushpinImage" . }}
+          imagePullPolicy: {{ .Values.pushpin.image.pullPolicy }}
           securityContext:
-              {{- toYaml .Values.securityContext | nindent 12 }}
+              {{- toYaml .Values.pushpin.securityContext | nindent 12 }}
+          ### suggestions to name these?
           ports:
-          - name: http-ff-pushpin-service
-            containerPort: {{.Values.service.port}}
-            protocol: "TCP"
-          - name: grpc-gitsync-ff-pushpin-service
-            containerPort: {{.Values.service.grpcport}}
-            protocol: "TCP"
+            - containerPort: 7999
+            - containerPort: 443
+            - containerPort: 5560
+            - containerPort: 5561
+            - containerPort: 5562
+            - containerPort: 5563
+            - containerPort: 5555
           resources:
-              {{- toYaml .Values.resources | nindent 12 }}
-          env:
-            - name : ANALYTICS_DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.timescaleSecret.password.name }}
-                  key: {{ .Values.timescaleSecret.password.key }}
-            - name: ANALYTICS_DB_USER
-              value: postgres
-            - name : DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.timescaleSecret.password.name }}
-                  key: {{ .Values.timescaleSecret.password.key }}
-            - name: DB_USER
-              value: postgres
+              {{- toYaml .Values.pushpin.resources | nindent 12 }}
           envFrom:
           - configMapRef:
-              name: ff-pushpin-service
+              name: ff-pushpin
+          livenessProbe:
+            tcpSocket:
+              port: 7999
+            initialDelaySeconds: 15
+            periodSeconds: 20
+        - name: ff-pushpin-worker
+          image: {{ include "ff-pushpin-service.pushpinworkerImage" . }}
+          imagePullPolicy: {{ .Values.pushpinworker.image.pullPolicy }}
+          securityContext:
+              {{- toYaml .Values.pushpinworker.securityContext | nindent 12 }}
+          ports:
+            - name: ff-worker-http
+              containerPort: 5000
+              protocol: "TCP"
+          resources:
+              {{- toYaml .Values.pushpin.resources | nindent 12 }}
+          envFrom:
+          - configMapRef:
+              name: ff-pushpin-worker
           readinessProbe:
             httpGet:
-              path: /api/1.0/health
-              port: 3000
+              path: /health
+              port: 5000
             initialDelaySeconds: 60
             timeoutSeconds: 5
             periodSeconds: 5
             failureThreshold: 8
           livenessProbe:
             httpGet:
-              path: /api/1.0/version
-              port: 3000
+              path: /health
+              port: 5000
             initialDelaySeconds: 40
             timeoutSeconds: 5
             periodSeconds: 10
