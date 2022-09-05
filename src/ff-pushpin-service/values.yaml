@@ -83,7 +83,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 16001
+  port: 17001
   targetport: 3000
   grpcport: 16002
   targetgrpcport: 3001
