@@ -16,7 +16,7 @@ spec:
     port: {{.Values.service.port17002}}
     protocol: TCP
     targetPort: {{.Values.service.targetport17002}}
-   - name: "port17003"
+  - name: "port17003"
     port: {{.Values.service.port17003}}
     protocol: TCP
     targetPort: {{.Values.service.targetport17003}}
