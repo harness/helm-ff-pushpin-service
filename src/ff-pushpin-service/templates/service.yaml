@@ -8,13 +8,17 @@ metadata:
 spec:
   type: {{.Values.service.type}}
   ports:
-  - name: http-ff-pushpin-service
-    port: {{.Values.service.port}}
+  - name: "port17001"
+    port: {{.Values.service.port17001}}
     protocol: TCP
-    targetPort: {{.Values.service.targetport}}
-  - name: grpc-gitsync-ff-pushpin-service
-    port: {{.Values.service.grpcport}}
+    targetPort: {{.Values.service.targetport17001}}
+  - name: "port17002"
+    port: {{.Values.service.port17002}}
     protocol: TCP
-    targetPort: {{.Values.service.targetgrpcport}}
+    targetPort: {{.Values.service.targetport17002}}
+   - name: "port17003"
+    port: {{.Values.service.port17003}}
+    protocol: TCP
+    targetPort: {{.Values.service.targetport17003}}
   selector:
      {{- include "ff-pushpin-service.selectorLabels" . | nindent 4 }}
