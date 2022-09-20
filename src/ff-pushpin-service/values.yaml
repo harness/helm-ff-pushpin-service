@@ -19,6 +19,14 @@ replicaCount: 1
 maxSurge: 1
 maxUnavailable: 0
 
+waitForInitContainer:
+  image:
+    registry: docker.io
+    repository: harness/helm-init-container
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    digest: ""
+
 pushpin:
   image:
     registry: docker.io
