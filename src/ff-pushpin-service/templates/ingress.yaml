@@ -15,7 +15,7 @@ spec:
               service:
                 name: ff-pushpin-service
                 port:
-                  number: {{ .Values.service.port }}
+                  number: {{ .Values.service.port17001 }}
             path: /sdk(/|$)(.*)
             pathType: ImplementationSpecific
   {{- if .Values.global.ingress.tls.enabled }}
