@@ -3,6 +3,20 @@ entries:
   ff-pushpin-service:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-09-26T09:37:25.220023579Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: A Helm chart for Kubernetes
+    digest: 6586ed0c0a641519e4a5efed80ef768913e4d0b8ca22f5e224e1f5a112434bb5
+    name: ff-pushpin-service
+    type: application
+    urls:
+    - https://github.com/harness/helm-ff-pushpin-service/releases/download/ff-pushpin-service-0.2.7/ff-pushpin-service-0.2.7.tgz
+    version: 0.2.7
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-09-23T13:27:00.697911884Z"
     dependencies:
     - name: harness-common
@@ -15,4 +29,4 @@ entries:
     urls:
     - https://github.com/harness/helm-ff-pushpin-service/releases/download/ff-pushpin-service-0.2.6/ff-pushpin-service-0.2.6.tgz
     version: 0.2.6
-generated: "2022-09-23T13:27:00.697921884Z"
+generated: "2022-09-26T09:37:25.220039679Z"
